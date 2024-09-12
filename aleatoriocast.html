@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Cat Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #catImage {
+            width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Cat Photo Generator</h1>
+    <img id="catImage" src="https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg" alt="Random Cat">
+    <br>
+    <button onclick="generateCat()">Get New Cat</button>
+
+    <script>
+        function generateCat() {
+            fetch('https://api.thecatapi.com/v1/images/search')
+                .then(response => response.json())
+                .then(data => {
+                    const catImage = document.getElementById('catImage');
+                    catImage.src = data[0].url;
+                })
+                .catch(error => console.log('Error fetching cat image:', error));
+        }
+    </script>
+</body>
+</html>
